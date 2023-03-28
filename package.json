@@ -1,0 +1,37 @@
+{
+  "name": "gaebolg",
+  "version": "6.1.0-alpha.nightly",
+  "main": "index.js",
+  "author": "sinkaroid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scathachgrip/gaebolg.git"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "netlify-lambda build src",
+    "ts-check": "tsc --noEmit --lib ES2015 ./src/*.ts",
+    "lint": "npx eslint . --ext .ts",
+    "lint:fix": "npx eslint . --fix"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "encoding": "^0.1.13",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/aws-lambda": "^8.10.59",
+    "@types/node-fetch": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "eslint": "^8.36.0",
+    "netlify-lambda": "^2.0.1",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.7"
+  }
+}
