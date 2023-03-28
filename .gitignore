@@ -5,3 +5,4 @@ intro.md
 .netlify
 yarn.lock
 package-lock.json
+.env
