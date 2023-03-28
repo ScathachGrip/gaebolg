@@ -1,6 +1,6 @@
 {
   "name": "gaebolg",
-  "version": "6.1.1-alpha.nightly",
+  "version": "6.1.2-alpha.nightly",
   "main": "index.js",
   "author": "sinkaroid",
   "repository": {
