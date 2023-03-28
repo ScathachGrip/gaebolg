@@ -32,7 +32,7 @@ export async function handler(
         uniqueTokenPerInterval: 500,
       });
 
-      const user = event.headers["client-ip"] || event.requestContext.identity.sourceIp as string;
+      const user = event.headers["client-ip"] as string;
       console.log(user);
       rateLimiter
         .check(10, user).then(console.log)
