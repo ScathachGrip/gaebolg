@@ -2,7 +2,7 @@ import { valid_image_hentai, valid_image_porn, valid_image_nasuverse } from "../
 import { version, name } from "../../package.json";
 
 
-export async function errorNoParams(ua: string) {
+export async function errorNoParams(ua: string | null) {
   return {
     statusCode: 400,
     body: JSON.stringify({
@@ -56,7 +56,7 @@ export async function maybeError(genre: string) {
   };
 } 
 
-export async function successDelivered(url: string, userAgent: string) {
+export async function successDelivered(url: string, userAgent: string | null) {
   return {
     statusCode: 200,
     headers: {
