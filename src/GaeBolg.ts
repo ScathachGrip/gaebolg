@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import p from "phin";
 import { version } from "../package.json";
 
 class GaeBolg {
@@ -16,8 +16,11 @@ class GaeBolg {
           gaeBolg.request("hentai", "yuri").then(console.log);
        */
   async request(url: string, image: string): Promise<string> {
-    const response = await fetch(`${url}/${image}/${process.env.REDACTED}`);
-    const res = await response.json() as string[];
+    const response = await p ({
+      url: `${url}/${image}/${process.env.REDACTED}`,
+      parse: "json"
+    });
+    const res = response.body as string[];
     const randomData = res[Math.floor(Math.random() * res.length)];
     return randomData;
   }
