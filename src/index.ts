@@ -7,7 +7,7 @@ import { iParams, valid_type,
 export async function handler(
   event: APIGatewayEvent) {
 
-  const userAgent = event.multiValueHeaders["user-agent"] ? event.multiValueHeaders["user-agent"][0] : "no user agent";
+  const userAgent = event.multiValueHeaders["user-agent"] ? event.multiValueHeaders["user-agent"][0] : null;
   const gateway = { specs: event.queryStringParameters as unknown as iParams };
 
   if (!valid_type.includes(gateway.specs.type)) return errorNoParams(userAgent);
