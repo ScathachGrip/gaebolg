@@ -1,8 +1,12 @@
+import "dotenv/config";
+import GaeBolg from "./GaeBolg";
 import { APIGatewayEvent } from "aws-lambda";
-import fetch from "node-fetch";
+import limiter from "lambda-rate-limiter";
 import { successDelivered, errorNoParams, errorTagsParams } from "./utils/handler";
 import { iParams, valid_type,
   valid_image_hentai, valid_image_porn, valid_image_nasuverse } from "./constant/data";
+
+const gaeBolg = new GaeBolg();
 
 export async function handler(
   event: APIGatewayEvent) {
@@ -23,29 +27,35 @@ export async function handler(
 
   else {
     try {
+      const rateLimiter = limiter({
+        interval: 60000,
+        uniqueTokenPerInterval: 500,
+      });
+
+      const user = event.headers["client-ip"] || event.requestContext.identity.sourceIp as string;
+      console.log(user);
+      rateLimiter
+        .check(10, user).then(console.log)
+        .catch(() => {
+          throw new Error("Too many requests");
+        })
+        .then(() => {
+          console.log("Request accepted");
+        });
+      
       let baseUrl = "", image = "";
       if (gateway.specs.type === "hentai") 
         baseUrl = "https://melony.scathach.id", image = gateway.specs.image;
       else if (gateway.specs.type === "porn") 
         baseUrl = "https://tristan.scathach.id", image = gateway.specs.image;
       else if (gateway.specs.type === "nasuverse") 
-        baseUrl = "https://emiya.scathach.id", image = gateway.specs.image;
+        baseUrl = "https://emiya.scdathach.id", image = gateway.specs.image;
 
-      // else return invalidParams(gateway.specs.type);
-
-      const response = await fetch(`${baseUrl}/${image}/hey.json`);
-      const res = await response.json();
-      const randomData = res[Math.floor(Math.random() * res.length)];
-      return successDelivered(randomData, userAgent);
-    } catch (error) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({
-          success: false,
-          message: `An error occured: ${error.message}`,
-          user_agent: userAgent
-        }),
-      };
+      const response = await gaeBolg.request(baseUrl, image);
+      return successDelivered(response, userAgent);
+    } catch (e) {
+      const error = e as string;
+      return gaeBolg.fail(gaeBolg.redacted(error.toString()) || error, userAgent);
       
     }
   }
