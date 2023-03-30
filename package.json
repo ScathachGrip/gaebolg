@@ -1,6 +1,6 @@
 {
   "name": "gaebolg",
-  "version": "6.1.5-alpha",
+  "version": "6.1.6-alpha",
   "main": "index.js",
   "author": "sinkaroid",
   "repository": {
@@ -8,9 +8,9 @@
     "url": "git+https://github.com/scathachgrip/gaebolg.git"
   },
   "license": "MIT",
-  "private": true,
   "scripts": {
     "build": "netlify-lambda build src",
+    "dev": "netlify dev",
     "ts-check": "tsc --noEmit --lib ES2015 ./src/*.ts",
     "lint": "npx eslint . --ext .ts",
     "lint:fix": "npx eslint . --fix"
@@ -29,8 +29,6 @@
     "@types/aws-lambda": "^8.10.114",
     "@types/lambda-rate-limiter": "^3.0.0",
     "@types/node": "^18.15.10",
-    "@types/node-cache": "^4.2.5",
-    "@types/node-fetch": "^2.6.2",
     "@types/request-ip": "^0.0.37",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",

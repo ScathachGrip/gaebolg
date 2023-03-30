@@ -1,7 +1,7 @@
-import { valid_image_hentai, valid_image_porn, valid_image_nasuverse } from "../constant/data";
+import GaeBolg from ".././GaeBolg";
 import { version, name } from "../../package.json";
 
-
+const gaeBolg = new GaeBolg();
 export async function errorNoParams(ua: string | null) {
   return {
     statusCode: 400,
@@ -11,15 +11,19 @@ export async function errorNoParams(ua: string | null) {
       params: [
         {
           type: "hentai",
-          image: valid_image_hentai
+          image: gaeBolg.hentaiImg
         },
         {
           type: "porn",
-          image: valid_image_porn
+          image: gaeBolg.pornImg
+        },
+        {
+          type: "cute",
+          image: gaeBolg.cuteImg
         },
         {
           type: "nasuverse",
-          image: valid_image_nasuverse
+          image: gaeBolg.nasuverseImg
         }
       ],
       message: "You didn't provide any parameters or it's invalid",

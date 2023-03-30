@@ -1,10 +1,41 @@
 import p from "phin";
 import { version } from "../package.json";
+import base from "./Base";
+import baseImage from "./BaseImage";
+import baseEndpoint from "./BaseEndpoint";
 
 class GaeBolg {
   version: string;
+  type: string[];
+  h: string;
+  p: string;
+  c: string;
+  n: string;
+  hentai: string;
+  porn: string;
+  cute: string;
+  nasuverse: string;
+  hentaiImg: string[];
+  pornImg: string[];
+  cuteImg: string[];
+  nasuverseImg: string[];
+  rateLimited: string;
   constructor() {
     this.version = version;
+    this.type = baseImage.TYPE;
+    this.h = baseEndpoint.h;
+    this.p = baseEndpoint.p;
+    this.c = baseEndpoint.c;
+    this.n = baseEndpoint.n;
+    this.hentai = base.HENTAI;
+    this.porn = base.PORN;
+    this.cute = base.CUTE;
+    this.nasuverse = base.NASUVERSE;
+    this.hentaiImg = baseImage.HENTAI_IMAGE;
+    this.pornImg = baseImage.PORN_IMAGE;
+    this.cuteImg = baseImage.CUTE_IMAGE;
+    this.nasuverseImg = baseImage.NASUVERSE_IMAGE;
+    this.rateLimited = "You are being rate limited, please try again later";
   }
 
   /**

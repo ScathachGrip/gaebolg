@@ -5,8 +5,7 @@ import Redis from "ioredis";
 import { getClientIp } from "request-ip";
 import { APIGatewayEvent } from "aws-lambda";
 import { successDelivered, errorNoParams, errorTagsParams, rateLimitHit } from "./utils/handler";
-import { iParams, valid_type,
-  valid_image_hentai, valid_image_porn, valid_image_nasuverse } from "./constant/data";
+import { iParams } from "./constant/data";
 
 const rateLimiter = new RateLimiter({
   db: new Redis(process.env.REDIS_URL as string),
@@ -22,16 +21,19 @@ export async function handler(
   const userAgent = event.multiValueHeaders["user-agent"] ? event.multiValueHeaders["user-agent"][0] : null;
   const gateway = { specs: event.queryStringParameters as unknown as iParams };
 
-  if (!valid_type.includes(gateway.specs.type)) return errorNoParams(userAgent);
+  if (!gaeBolg.type.includes(gateway.specs.type)) return errorNoParams(userAgent);
 
-  else if (gateway.specs.type === "hentai"
-    && !valid_image_hentai.includes(gateway.specs.image)) return errorTagsParams("hentai");
+  else if (gateway.specs.type === gaeBolg.h
+    && !gaeBolg.hentaiImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.h);
 
-  else if (gateway.specs.type === "porn"
-    && !valid_image_porn.includes(gateway.specs.image)) return errorTagsParams("porn");
+  else if (gateway.specs.type === gaeBolg.p
+    && !gaeBolg.pornImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.p);
 
-  else if (gateway.specs.type === "nasuverse"
-    && !valid_image_nasuverse.includes(gateway.specs.image)) return errorTagsParams("nasuverse");
+  else if (gateway.specs.type === gaeBolg.c
+    && !gaeBolg.cuteImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.c);
+
+  else if (gateway.specs.type === gaeBolg.n
+    && !gaeBolg.nasuverseImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.n);
 
   else {
     try {
@@ -42,11 +44,13 @@ export async function handler(
       else {
         let baseUrl = "", image = "";
         if (gateway.specs.type === "hentai") 
-          baseUrl = "https://melony.scathach.id", image = gateway.specs.image;
+          baseUrl = gaeBolg.hentai, image = gateway.specs.image;
         else if (gateway.specs.type === "porn") 
-          baseUrl = "https://tristan.scathach.id", image = gateway.specs.image;
+          baseUrl = gaeBolg.porn, image = gateway.specs.image;
+        else if (gateway.specs.type === "cute")
+          baseUrl = gaeBolg.cute, image = gateway.specs.image;
         else if (gateway.specs.type === "nasuverse") 
-          baseUrl = "https://emiya.scathach.id", image = gateway.specs.image;
+          baseUrl = gaeBolg.nasuverse, image = gateway.specs.image;
 
         const response = await gaeBolg.request(baseUrl, image);
         return successDelivered(response, userAgent);
