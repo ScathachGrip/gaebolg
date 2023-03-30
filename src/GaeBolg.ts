@@ -19,7 +19,6 @@ class GaeBolg {
   pornImg: string[];
   cuteImg: string[];
   nasuverseImg: string[];
-  rateLimited: string;
   constructor() {
     this.version = version;
     this.type = baseImage.TYPE;
@@ -35,7 +34,6 @@ class GaeBolg {
     this.pornImg = baseImage.PORN_IMAGE;
     this.cuteImg = baseImage.CUTE_IMAGE;
     this.nasuverseImg = baseImage.NASUVERSE_IMAGE;
-    this.rateLimited = "You are being rate limited, please try again later";
   }
 
   /**
