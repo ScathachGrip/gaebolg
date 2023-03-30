@@ -43,13 +43,13 @@ export async function handler(
       if (!limit.remaining) return rateLimitHit(userAgent, clientIp);
       else {
         let baseUrl = "", image = "";
-        if (gateway.specs.type === "hentai") 
+        if (gateway.specs.type === gaeBolg.h) 
           baseUrl = gaeBolg.hentai, image = gateway.specs.image;
-        else if (gateway.specs.type === "porn") 
+        else if (gateway.specs.type === gaeBolg.p) 
           baseUrl = gaeBolg.porn, image = gateway.specs.image;
-        else if (gateway.specs.type === "cute")
+        else if (gateway.specs.type === gaeBolg.c)
           baseUrl = gaeBolg.cute, image = gateway.specs.image;
-        else if (gateway.specs.type === "nasuverse") 
+        else if (gateway.specs.type === gaeBolg.n) 
           baseUrl = gaeBolg.nasuverse, image = gateway.specs.image;
 
         const response = await gaeBolg.request(baseUrl, image);
