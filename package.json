@@ -12,8 +12,9 @@
     "build": "netlify-lambda build src",
     "dev": "netlify dev",
     "ts-check": "tsc --noEmit --lib ES2015 ./src/*.ts",
-    "lint": "npx eslint . --ext .ts",
-    "lint:fix": "npx eslint . --fix"
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --fix",
+    "docs": "typedoc --entryPointStrategy expand src/"
   },
   "dependencies": {
     "async-ratelimiter": "^1.3.7",
@@ -34,6 +35,7 @@
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.36.0",
     "netlify-lambda": "^2.0.1",
+    "typedoc": "^0.24.1",
     "typescript": "^5.0.2"
   }
 }
