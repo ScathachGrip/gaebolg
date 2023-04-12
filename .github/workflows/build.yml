@@ -1,4 +1,4 @@
-name: eslint-check
+name: linting
 
 on:
   push:
