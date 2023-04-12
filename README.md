@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="https://scathachbot.xyz/img/about/logo-ngeri.png" alt="Logo" width="250px" height="250px" style="border-radius:10%"/>
+<a href="https://scathachbot.xyz"><img src="https://scathachbot.xyz/img/about/logo-ngeri.png" alt="bolg" width="300px" height="300px" style="border-radius:10%"/></a>
 
 # @ScathachGrip/gaebolg
 
 **Prototype API design with only cloudflare workers and lambda functions**
 
-[![eslint-check](https://github.com/ScathachGrip/gaebolg/actions/workflows/build.yml/badge.svg)](https://github.com/ScathachGrip/gaebolg/actions/workflows/build.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b27ff0b7-a738-4873-bd58-b9bb46cf2240/deploy-status)](https://app.netlify.com/sites/sweet-crepe-a2885e/deploys) [![eslint-check](https://github.com/ScathachGrip/gaebolg/actions/workflows/build.yml/badge.svg)](https://github.com/ScathachGrip/gaebolg/actions/workflows/build.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/76bf88b037eba8ddcd6c/maintainability)](https://codeclimate.com/github/ScathachGrip/gaebolg/maintainability)
 
 </div>

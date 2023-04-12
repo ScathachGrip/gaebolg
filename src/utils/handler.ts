@@ -24,6 +24,10 @@ export async function errorNoParams(ua: string | null) {
         {
           type: "nasuverse",
           image: gaeBolg.nasuverseImg
+        },
+        {
+          type: "minigames",
+          image: gaeBolg.minigamesImg
         }
       ],
       message: "You didn't provide any parameters or it's invalid",
@@ -69,6 +73,20 @@ export async function successDelivered(url: string, userAgent: string | null) {
     body: JSON.stringify({
       success: true,
       url: url,
+      user_agent: userAgent
+    })
+  };
+}
+
+export async function successDeliveredObject(data: object, userAgent: string | null) {
+  return {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      success: true,
+      data: data,
       user_agent: userAgent
     })
   };

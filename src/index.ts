@@ -4,12 +4,12 @@ import RateLimiter  from "async-ratelimiter";
 import Redis from "ioredis";
 import { getClientIp } from "request-ip";
 import { APIGatewayEvent } from "aws-lambda";
-import { successDelivered, errorNoParams, errorTagsParams, rateLimitHit } from "./utils/handler";
+import { successDelivered, successDeliveredObject, errorNoParams, errorTagsParams, rateLimitHit } from "./utils/handler";
 import { iParams } from "./constant/data";
 
 const rateLimiter = new RateLimiter({
   db: new Redis(process.env.REDIS_URL as string),
-  max: 3,
+  max: 5,
   duration: 10000
 });
 
@@ -35,6 +35,9 @@ export async function handler(
   else if (gateway.specs.type === gaeBolg.n
     && !gaeBolg.nasuverseImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.n);
 
+  else if (gateway.specs.type === gaeBolg.m
+    && !gaeBolg.minigamesImg.includes(gateway.specs.image)) return errorTagsParams(gaeBolg.m);
+
   else {
     try {
       //const user = event.headers["client-ip"] as string;
@@ -51,9 +54,16 @@ export async function handler(
           baseUrl = gaeBolg.cute, image = gateway.specs.image;
         else if (gateway.specs.type === gaeBolg.n) 
           baseUrl = gaeBolg.nasuverse, image = gateway.specs.image;
+        else if (gateway.specs.type === gaeBolg.m)
+          baseUrl = gaeBolg.minigames, image = gateway.specs.image;
 
-        const response = await gaeBolg.request(baseUrl, image);
-        return successDelivered(response, userAgent);
+        if (baseUrl !== gaeBolg.minigames) {
+          const response = await gaeBolg.request(baseUrl, image);
+          return successDelivered(response, userAgent);
+        } else {
+          const response = await gaeBolg.requestObject(baseUrl, image);
+          return successDeliveredObject(response, userAgent);
+        }
       }
       
     } catch (e) {

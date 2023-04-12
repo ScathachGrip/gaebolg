@@ -2,5 +2,6 @@ export default {
   h: "hentai",
   p: "porn",
   c: "cute",
-  n: "nasuverse"
+  n: "nasuverse",
+  m: "minigames"
 };
