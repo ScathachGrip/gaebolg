@@ -98,7 +98,7 @@ export function rateLimitHit(userAgent: string | null, ip: string | null): objec
     body: JSON.stringify({
       success: false,
       message: "You have been rate limited",
-      message_again: "There is a limit of 3 requests per 10 seconds",
+      message_again: "There is a limit of 5 requests per 10 seconds",
       user_agent: userAgent,
       ip: ip,
     })
